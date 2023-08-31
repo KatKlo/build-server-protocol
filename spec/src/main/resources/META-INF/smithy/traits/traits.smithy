@@ -78,3 +78,7 @@ structure dataKind {
 list PolymorphicDataList {
     member: PolymorphicData
 }
+
+@trait()
+structure experimental {
+}
