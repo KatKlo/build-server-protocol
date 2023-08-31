@@ -377,7 +377,12 @@ class SmithyToIR(model: Model) {
       .map(_.getMessage.orElse(""))
       .map(Hint.Deprecated)
 
-    List(documentation, deprecated).flatten
+    val experimental = shape
+      .getTrait(classOf[ExperimentalTrait])
+      .toScala
+      .map(_ => Hint.Experimental)
+
+    List(documentation, deprecated, experimental).flatten
   }
 
   class DocShapeVisitor(map: MMap[ShapeId, DocNode]) extends ShapeVisitor.Default[Unit] {
